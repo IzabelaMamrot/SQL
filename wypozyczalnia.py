@@ -1,4 +1,6 @@
 import sqlite3
+print("Baza filmow \n","Wybierz opcje \n","1 - Dodaj nowy film \n", "2 - Usun nowy film \n", "3 - Pokaz wszystkie filmy \n", "4 - Znajdz film po roku \n", "5 - Wyjscie \n")
+x=int(input())
 
 def create_film_table(): #funkcja - musza byc wartosci
 	with sqlite3.connect('wypozycz.db') as db:
@@ -31,7 +33,7 @@ def select_all_films():
 		c.execute(sql)
 		wynik=c.fetchall() #lista wszytkich wymagania WSZYSTKIE
 		print(wynik)
-select_all_films()
+
 
 def select_one_film():
 	with sqlite3.connect('wypozycz.db') as db:
@@ -40,7 +42,6 @@ def select_one_film():
 		c.execute(sql)
 		wynik=c.fetchone() #lista wszytk 
 		print(wynik)
-select_one_film()
 
 def select_genre(typ):
 	with sqlite3.connect('wypozycz.db') as db:
@@ -49,15 +50,34 @@ def select_genre(typ):
 		c.execute(sql,(typ,))
 		wynik=c.fetchall()
 		return wynik
+		
+def select_year(rok):
+	with sqlite3.connect('wypozycz.db') as db:
+		c=db.cursor()
+		sql="SELECT * FROM Film WHERE rok = ?"
+		c.execute(sql,(rok,))
+		wynik=c.fetchall()
+		return wynik
+		
 
-wybierz = input("Jaki gatunek filmowy chcesz zobaczyc? \n") 
-films = select_genre(wybierz)
-print(films)
+#wybierz = input("Jaki gatunek filmowy chcesz zobaczyc? \n") 
+#films = select_genre(wybierz)
+#print(films)
+if x==1:
+	y=input("Tytul: ")
+	yy=input("Typ: ")
+	yyy=int(input("Rok: "))
+	z=(y,yy,yyy)
+	insert_records(z)
 
+#elif x==2:
+	
+elif x==3:
+	select_all_films()
 
-
-
-
-
-
-
+elif x==4:
+	rok=int(input("Podaj rok: "))
+	select_year(rok)
+print(select_year(rok))
+#select_one_film()
+#select_all_films()
