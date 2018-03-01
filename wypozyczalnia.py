@@ -1,4 +1,6 @@
 import sqlite3
+import sys
+
 print("Baza filmow \n","Wybierz opcje \n","1 - Dodaj nowy film \n", "2 - Usun nowy film \n", "3 - Pokaz wszystkie filmy \n", "4 - Znajdz film po roku \n", "5 - Wyjscie \n")
 x=int(input())
 
@@ -63,6 +65,7 @@ def select_year(rok):
 #wybierz = input("Jaki gatunek filmowy chcesz zobaczyc? \n") 
 #films = select_genre(wybierz)
 #print(films)
+
 if x==1:
 	y=input("Tytul: ")
 	yy=input("Typ: ")
@@ -79,5 +82,10 @@ elif x==4:
 	rok=int(input("Podaj rok: "))
 	select_year(rok)
 print(select_year(rok))
+	
+elif x==5:
+	sys.exit()
+else:
+	print("Nie ma takiej komendy")
 #select_one_film()
 #select_all_films()
